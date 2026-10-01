@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora | Predictive Analytics Engine</title>
+    <link href="{% static 'default.css' %}?v=2.1" rel="stylesheet" type="text/css" media="screen" />
+    <script language="javascript">
+    function validate(formObj) {
+        if(formObj.t1.value.length == 0) {
+            alert("Please upload test data file");
+            formObj.t1.focus();
+            return false;
+        }
+        return true;
+    }
+    </script>
+</head>
+<body>
+
+<header id="header">
+    <div id="logo">
+        <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px;"></div>
+        <h1>Aurora<span>Churn</span></h1>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li><a href="{% url 'index' %}"><span>📊</span> Dashboard</a></li>
+            <li><a href="{% url 'Visualization' %}"><span>📈</span> Analytics Hub</a></li>
+            <li class="current_page_item"><a href="{% url 'Predict' %}"><span>🔮</span> Churn Engine</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="content_wrapper">
+    <header class="animate-fade-in" style="margin-bottom: 3rem; text-align: center;">
+        <h1 class="page-title">Prediction Engine</h1>
+        <p class="text-muted">High-fidelity customer behavioral modeling and churn forecasting.</p>
+    </header>
+
+    <div class="card animate-fade-in">
+        <div style="margin-bottom: 2rem;">
+            <h2 style="font-size: 1.25rem; font-weight: 700;">Model Input Configuration</h2>
+            <p class="text-muted" style="font-size: 0.85rem;">Input the telemetry data for customer activity to begin the churn risk assessment.</p>
+        </div>
+
+        <form name="f1" method="post" action="{% url 'PredictAction' %}" enctype="multipart/form-data" OnSubmit="return validate(this)">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <input type="file" name="t1" id="t1" />
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--secondary); opacity: 0.6;">
+                    CONNECTED TO SYSTEM_BUS: AGENT_MODE_ACTIVE
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 2rem;">
+                <input type="submit" value="Execute Model Analysis" />
+            </div>
+        </form>
+
+        {% if data %}
+        <div class="mt-4 animate-fade-in">
+            <h3 style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">>>> Analysis_Log.sh</h3>
+            <div class="terminal-output">
+                <div style="padding-bottom: 1rem; opacity: 0.7;">[SYSTEM]: EXECUTION_SEQ_001_COMPLETE</div>
+                <div style="padding-bottom: 1rem; opacity: 0.7;">[DATA_STREAM]: LOAD_SUCCESS_FROM_SOURCE</div>
+                <div style="border-top: 1px solid rgba(74, 222, 128, 0.2); padding-top: 1.5rem;">
+                    {{ data|safe }}
+                </div>
+                <div style="margin-top: 2rem; opacity: 0.3;">[END_OF_STREAM]</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+</body>
+</html>

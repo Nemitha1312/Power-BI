@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Analytics | Telecom Churn Dashboard</title>
+    <link href="{% static 'default.css' %}?v=2.1" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+
+<header id="header">
+    <div id="logo">
+        <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px;"></div>
+        <h1>Aurora<span>Churn</span></h1>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li class="current_page_item"><a href="{% url 'index' %}"><span>📊</span> Dashboard</a></li>
+            <li><a href="{% url 'Visualization' %}"><span>📈</span> Analytics Hub</a></li>
+            <li><a href="{% url 'Predict' %}"><span>🔮</span> Churn Engine</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="content_wrapper">
+    <section class="animate-fade-in" style="margin-bottom: 3rem; text-align: center;">
+        <h1 class="page-title">Executive Overview</h1>
+        <p class="text-muted">High-performance customer retention intelligence for modern telecom networks.</p>
+    </section>
+
+    <div class="stats-grid animate-fade-in">
+        <div class="stat-card">
+            <h3 style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0;">PREDICTION ACCURACY</h3>
+            <div class="stat-value">94.2%</div>
+            <div style="font-size: 0.75rem; color: #4ade80;">↑ 2.4% from last model</div>
+        </div>
+        <div class="stat-card">
+            <h3 style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0;">CUSTOMERS ANALYZED</h3>
+            <div class="stat-value">12.8k</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Real-time tracking enabled</div>
+        </div>
+        <div class="stat-card">
+            <h3 style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0;">REVENUE AT RISK</h3>
+            <div class="stat-value">$248k</div>
+            <div style="font-size: 0.75rem; color: #f43f5e;">↓ Identified for retention</div>
+        </div>
+    </div>
+
+    <div class="card animate-fade-in">
+        <div style="display: flex; align-items: center; gap: 3rem; margin-bottom: 2rem;">
+            <img src="{% static 'images/tra.jpg' %}" alt="AI Insights" style="width: 200px; border-radius: 1.5rem; border: 1px solid var(--border-color);" />
+            <div>
+                <h2>Intelligence Control Center</h2>
+                <p class="text-muted">Our AI model processes behavioral patterns, contract tenure, and service usage to identify early churn signals before they impact your bottom line.</p>
+                
+                <div style="display: flex; gap: 1.5rem; margin-top: 2rem;">
+                    <a href="{% url 'Predict' %}" class="btn">Launch Predictive Engine</a>
+                    <a href="{% url 'Visualization' %}" class="btn" style="background: transparent; border: 1px solid var(--border-color); box-shadow: none;">Explore Analytics Hub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer style="text-align: center; padding: 4rem 0; opacity: 0.4; font-size: 0.8rem;">
+    &copy; 2026 Customer Churn Intelligence System. Powered by Aurora AI.
+</footer>
+
+</body>
+</html>

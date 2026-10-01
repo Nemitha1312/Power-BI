@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora | Analytics Visual Hub</title>
+    <link href="{% static 'default.css' %}?v=2.1" rel="stylesheet" type="text/css" media="screen" />
+    <style>
+        select {
+            width: 100%;
+            padding: 1.25rem 1.75rem;
+            border-radius: 1.25rem;
+            border: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a855f7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.75rem center;
+            background-size: 1.5rem;
+            transition: var(--transition);
+        }
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+        }
+        option { background: var(--bg-deep); }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div id="logo">
+        <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px;"></div>
+        <h1>Aurora<span>Churn</span></h1>
+    </div>
+    <nav id="menu">
+        <ul>
+            <li><a href="{% url 'index' %}"><span>📊</span> Dashboard</a></li>
+            <li class="current_page_item"><a href="{% url 'Visualization' %}"><span>📈</span> Analytics Hub</a></li>
+            <li><a href="{% url 'Predict' %}"><span>🔮</span> Churn Engine</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="content_wrapper">
+    <header class="animate-fade-in" style="margin-bottom: 3.5rem; text-align: center;">
+        <h1 class="page-title">Visual Research Lab</h1>
+        <p class="text-muted">Multi-dimensional categorical distribution and behavioral telemetry visualization.</p>
+    </header>
+
+    <div class="card animate-fade-in" style="max-width: 800px; margin: 0 auto 2rem;">
+        <div style="margin-bottom: 2.5rem;">
+            <h2 style="font-size: 1.25rem; font-weight: 700;">Data Visual Filter</h2>
+            <p class="text-muted" style="font-size: 0.85rem;">Select the parameter to generate the corresponding telemetry distribution report.</p>
+        </div>
+
+        <form name="f1" method="post" action="{% url 'VisualizationAction' %}">
+            {% csrf_token %}
+            <div class="form-group" style="margin-bottom: 2.5rem;">
+                <label for="t1" style="display: block; margin-bottom: 1rem; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                    Select Categorical Dimension
+                </label>
+                <select name="t1" id="t1">
+                    <option value="Age">Distribution: Customer Age</option>
+                    <option value="Gender">Distribution: Gender Demographics</option>
+                    <option value="State">Distribution: Geographical State Distribution</option>
+                    <option value="Churn_Category">Distribution: Churn Prediction Probability</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="Build Perspective" />
+            </div>
+        </form>
+
+        {% if data %}
+        <div class="mt-4 animate-fade-in" style="background: rgba(255, 255, 255, 0.02); border-radius: 1.5rem; padding: 2.5rem; border: 1px dashed var(--secondary-glow); margin-top: 3rem;">
+            <div class="text-center" style="font-size: 1.125rem; color: var(--text-main); font-family: 'Space Grotesk', sans-serif;">
+                {{ data|safe }}
+            </div>
+            <div style="text-align: center; margin-top: 2.5rem; opacity: 0.2; font-size: 0.75rem; font-family: monospace;">REPORT_ID: AUR-XR-9942_TS_ACTIVE</div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+
+<footer style="text-align: center; padding: 4rem 0; opacity: 0.4; font-size: 0.8rem;">
+    &copy; 2026 Customer Churn Intelligence System. Powered by Aurora AI.
+</footer>
+
+</body>
+</html>
